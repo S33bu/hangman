@@ -14,7 +14,10 @@ peidetud_sõna1 = list(peidetud_sõna)
 print(mängusõna, elud)
 
 while elud > 0:
-    print ("Arva sõna ära!: ", peidetud_sõna1)
+    print ("Arva sõna ära!: ", end="")
+    for i in peidetud_sõna1:
+        print(i, end="")
+    print()
     täht = input("Paku tähte!: ")
     if täht in mängusõna:
         for i in range (len(mängusõna)):
