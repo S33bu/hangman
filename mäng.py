@@ -3,18 +3,18 @@ import time
 
 pilt = ["""
           -------
-          |		|
+          |     |
           |
           |
           |
           |
           |
           |
-          -------
+          ---
           """, """
-           -------
-          |		|
-          |		0
+          -------
+          |     |
+          |     0
           |
           |
           |
@@ -22,12 +22,12 @@ pilt = ["""
           |
           -------
           """,
-          """
+           """
           -------
-          |		|
-          |		0
-          |		|
-          |		|
+          |     |
+          |     0
+          |     |
+          |     |
           |
           |
           |
@@ -35,44 +35,44 @@ pilt = ["""
           """,
           """
           -------
-          |		|
-          |		0
-          |		|
-          |		|
-          |	   /
+          |     |
+          |     0
+          |     |
+          |     |
+          |    /
           |
           |
           -------
           """,
           """
           -------
-          |		|
-          |		0
-          |		|
-          |		|
-          |	   / \
+          |     |
+          |     0
+          |     |
+          |     |
+          |    / \\
           |
           |
           -------
           """,
           """
           -------
-          |		|
-          |		0
-          |	  --|
-          |		|
-          |	   / \
+          |     |
+          |     0
+          |   --|
+          |     |
+          |    / \\
           |
           |
           -------
           """,
           """
           -------
-          |		|
-          |		0
-          |	  --|--
-          |		|
-          |	   / \
+          |     |
+          |     0
+          |   --|--
+          |     |
+          |    / \\
           |
           |
           -------
@@ -84,15 +84,17 @@ pilt = ["""
 sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
           "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
 
-mängusõna = random.choice(sõnad) #valib mingi sõna üleval olevast listist
+mängusõna = random.choice(sõnad)#valib mingi sõna üleval olevast listist
 mängusõna1 = list(mängusõna)
 elud = 7
-peidetud_sõna = len(mängusõna) * "_" #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
-peidetud_sõna1 = list(peidetud_sõna)
-arvad_sõna = ""
+peidetud_sõna = list("_" * len(mängusõna))  #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
+arvad_sõna = ''
+õige_sõna = ''
+n = 0
+
 
 print("Mängime poomist!")
-print("Sul on 6 võimalust valesti pakkuda")
+print("Sul on 7 võimalust valesti pakkuda")
 
 print(mängusõna, elud)
 
@@ -101,62 +103,81 @@ while True:
         
         if elud <= 0:
             print("Sa kaotasid")
-            print("Kas tahad uuesti mängida? (Jah / Ei)")
-            if input("(Jah / Ei)") == "Ei":
+            print("Õige sõna oli", mängusõna)
+            print("Kas tahad uuesti mängida?") #lisasin et sobib nii Jah kui ka jah kui ka JAH
+            vastus = input("Jah / Ei: ").lower()
+            if vastus == "ei":
                 break
             else:
                 elud = 7
                 mängusõna = random.choice(sõnad)
+                mängusõna1 = list(mängusõna)
+                peidetud_sõna = list("_" * len(mängusõna))
+                õige_sõna = ''
+                arvad_sõna = ''
+                print(mängusõna)
+                
 
-        if elud == 7:
-            print(pilt[0])
-        elif elud == 6:
-            print(pilt[1])
-        elif elud == 5:
-            print(pilt[2])
-        elif elud == 4:
-            print(pilt[3])
-        elif elud == 3:
-            print(pilt[4])
-        elif elud == 2:
-            print(pilt[5])
-        elif elud == 1:
-            print(pilt[6])
+        print(pilt[7-elud])
 
         print ("Arva sõna ära!: ", end="")
-        for i in peidetud_sõna1:
+        for i in peidetud_sõna:
             print(i, end="")
         print()
         
+        
 
-        try:
-            täht = input("Paku tähte!: ")
-        except:
-            print("Sisesta ainult täht")
+        täht = input("Paku tähte!: ").lower()
+        
         if not täht.isalpha():
-            print("Sisesta ainult TÄHT!")
+            print(täht, "ei ole täht")
             continue
         elif len(täht) != 1:
-            print("Sisesta ainult ÜKS täht!")
+            print(täht, "on rohkem kui üks täht")
             continue
+        elif täht in arvad_sõna:
+            print("Oled juba proovinud", täht, "tähte")
+            continue
+           
+        
         if täht in mängusõna:
             for i in range (len(mängusõna)):
-                if mängusõna1[i] == täht:
-                    peidetud_sõna1[i] = täht
+                if mängusõna[i] == täht:
+                    peidetud_sõna[i] = täht
+ 
+            õige_sõna += täht #nende kaugus üli tähtis!
+            arvad_sõna += täht #vajalik kuna, muidu kui paned õiget tähte 2x jookseb errorisse
 
         if täht not in mängusõna:
             elud -= 1
+            arvad_sõna += täht
+            
 
-        if peidetud_sõna1 == mängusõna1:
+        if set(õige_sõna) == set(mängusõna):
+            print(mängusõna)
             print("Tubli! Võitsid!")
             print("Kas tahad uuesti mängida?: ")
-            if input("Jah / Ei") == "Jah":
+            vastus = input("Jah / Ei: ").lower()
+            if vastus == "jah":
+            
                 elud = 7
+                mängusõna = random.choice(sõnad)
+                
+                mängusõna1 = list(mängusõna)
+                peidetud_sõna = list("_" * len(mängusõna))
+                õige_sõna = ''
+                arvad_sõna = ''
+                
+                
                 continue
+            else:
+                break
+            
 
 
     except:
         print("Proovi uuesti")
+
 
 
 
