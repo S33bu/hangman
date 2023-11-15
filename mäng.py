@@ -81,22 +81,26 @@ pilt = ["""
           
           ]
 
-sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
-          "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
+def alusta_algusest():
+    sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
+            "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
 
-mängusõna = random.choice(sõnad)#valib mingi sõna üleval olevast listist
-mängusõna1 = list(mängusõna)
-elud = 7
-peidetud_sõna = list("_" * len(mängusõna))  #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
-arvad_sõna = ''
-õige_sõna = ''
-n = 0
+    mängusõna = random.choice(sõnad)#valib mingi sõna üleval olevast listist
+    mängusõna1 = list(mängusõna)
+    elud = 7
+    peidetud_sõna = list("_" * len(mängusõna))  #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
+    arvad_sõna = ''
+    õige_sõna = ''
+    print("Mängime poomist!")
+    print("Sul on 7 võimalust valesti pakkuda")
+
+    print(mängusõna, elud)
+
+    return mängusõna, mängusõna1, peidetud_sõna, elud, arvad_sõna, õige_sõna
+    
 
 
-print("Mängime poomist!")
-print("Sul on 7 võimalust valesti pakkuda")
-
-print(mängusõna, elud)
+mängusõna, mängusõna1, peidetud_sõna, elud, arvad_sõna, õige_sõna = alusta_algusest()
 
 while True:
     try:
@@ -109,13 +113,8 @@ while True:
             if vastus == "ei":
                 break
             else:
-                elud = 7
-                mängusõna = random.choice(sõnad)
-                mängusõna1 = list(mängusõna)
-                peidetud_sõna = list("_" * len(mängusõna))
-                õige_sõna = ''
-                arvad_sõna = ''
-                print(mängusõna)
+                mängusõna, mängusõna1, peidetud_sõna, elud, arvad_sõna, õige_sõna
+                continue
                 
 
         print(pilt[7-elud])
@@ -160,13 +159,7 @@ while True:
             vastus = input("Jah / Ei: ").lower()
             if vastus == "jah":
             
-                elud = 7
-                mängusõna = random.choice(sõnad)
-                
-                mängusõna1 = list(mängusõna)
-                peidetud_sõna = list("_" * len(mängusõna))
-                õige_sõna = ''
-                arvad_sõna = ''
+                mängusõna, mängusõna1, peidetud_sõna, elud, arvad_sõna, õige_sõna
                 
                 
                 continue
