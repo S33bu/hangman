@@ -29,7 +29,7 @@ def kontrolli():
         sisestatud_täht = sõna_pakkumiskast.get()
         
         if elud <= 0: 
-            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="black")
+            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="#90EE90")
             return
         
         if not sisestatud_täht.isalpha():
@@ -63,7 +63,7 @@ def kontrolli():
                 
             
         if set(peidetud_sõna) == set(mängusõna):
-            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="orange")
+            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="#90EE90")
             return
         
 def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
