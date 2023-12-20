@@ -32,6 +32,7 @@ def kontrolli():
         
         if elud <= 1: 
             message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="#FF9999", bg="#FF1493")
+            ekraanil_peidetud_sõna.config(text=mängusõna)
             mäng_kinni.config(text="Lahkun kurbusega")
             return
         
@@ -73,7 +74,7 @@ def kontrolli():
         sõna_pakkumiskast.delete(0, "end")
         sõna_pakkumiskast.icursor(0)
 
-def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
+def mäng_algab():            
     global elud, peidetud_sõna, arvad_sõna, mängusõna, sõna_pakkumiskast, message_label, ekraanil_peidetud_sõna, label, mäng_kinni
   
     
@@ -149,7 +150,7 @@ def algus():
 
 
 
-    aken.mainloop() #see on mingi tähtis command vist aga ma täpselt ei saa aru mis teeb
+    aken.mainloop() 
 
 def alusta_uuesti():            #viib tagasi esimesele aknale
     global mäng
