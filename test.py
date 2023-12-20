@@ -18,8 +18,43 @@ pilt = [
 ]
 
 
-def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
-    
+def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
+    global elud
+    global õige_sõna
+    global arvad_sõna
+
+    def kontrolli():
+        sisestatud_täht = sõna_pakkumiskast.get()
+        ekraanil_peidetud_sõna.config(text=sisestatud_täht)
+        
+        
+        if not sisestatud_täht.isalpha():
+            message_label.config(text=f"{sisestatud_täht} ei ole täht")
+        elif len(sisestatud_täht) != 1:
+            message_label.config(text=f"{sisestatud_täht} on rohkem kui üks täht")
+        elif sisestatud_täht in arvad_sõna:
+            message_label.config(text=f"Oled juba proovinud {sisestatud_täht} tähte")
+            
+        
+        if sisestatud_täht in mängusõna:
+            for i in range (len(mängusõna)):
+                if mängusõna[i] == sisestatud_täht:
+                    ekraanil_peidetud_sõna[i] = sisestatud_täht
+
+            õige_sõna += sisestatud_täht #nende kaugus üli tähtis!
+            arvad_sõna += sisestatud_täht #vajalik kuna, muidu kui paned õiget tähte 2x jookseb errorisse
+
+        if sisestatud_täht not in mängusõna:
+            global elud
+            elud -= 1
+            arvad_sõna += sisestatud_täht
+            
+
+        if set(õige_sõna) == set(mängusõna):
+            print(mängusõna)
+
+
+
     sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
         "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
 
@@ -27,8 +62,7 @@ def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
     mängusõna1 = list(mängusõna)
     elud = 7
     peidetud_sõna = list("_" * len(mängusõna))  #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
-    arvad_sõna = ''
-    õige_sõna = ''
+
     
     #--------------------------------------
 
@@ -41,20 +75,32 @@ def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
     mäng.geometry("800x600")
 
     font = ("Helvetica", 16)
-    label = tk.Label(mäng, text=pilt[6], font=font)
+    font2 =(16)
+    label = tk.Label(mäng, text=pilt[0], font=font)
     label.pack(pady=10)
 
     ekraanil_peidetud_sõna = tk.Label(mäng, text = peidetud_sõna, font=font)
-    ekraanil_peidetud_sõna.pack(pady=10)
+    ekraanil_peidetud_sõna.pack()
 
     sõna_pakkumiskast = tk.Entry(mäng)
-    sõna_pakkumiskast.pack(pady=10)
+    sõna_pakkumiskast.pack()
 
-    mäng_kinni = tk.Button(mäng, text="Annan alla :(", command=alusta_uuesti)
-    mäng_kinni.pack(pady=40)
+    message_label = tk.Label(mäng, text="")
 
-    sisestatud_sõna = sõna_pakkumiskast.get()
-    print("kirjutasid: ", sisestatud_sõna)
+    sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli)
+    sõna_pakkumiskasti_kontroll.pack()
+    
+
+    mäng_kinni = tk.Button(mäng, text="Annan alla :(", command=alusta_uuesti,font=font)
+    mäng_kinni.pack()
+
+    
+
+    while elud > 0:
+        kontrolli()
+
+
+
 
 #----------------------------------------------------------------
 #SIIN ON SEE MAIN ASI, MIS HAKKAB JOOKSMA KOHE KUI PANED ASJA TÖÖLE
