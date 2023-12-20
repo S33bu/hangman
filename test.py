@@ -1,7 +1,7 @@
 import tkinter as tk
 import random
 import time
-
+from PIL import Image 
 #hakka lugema sellest rohelisest joonest allpool olevast tekstist
 
 aken = None                 #gpt ytles et ma paneks selle, siis saab mäng_algab funktsioon aru, et eelmine aken kinni panna
@@ -27,8 +27,8 @@ pilt = [
 def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     global elud, peidetud_sõna, arvad_sõna
   
-    while elud > 0:
-        kontrolli() 
+    while elud > 0: 
+        kontrolli()
 
     def kontrolli():
         global elud
@@ -40,11 +40,16 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
             return
         
         if not sisestatud_täht.isalpha():
-            message_label.config(text=f"{sisestatud_täht} ei ole täht")
+            message_label.config(text=f"{sisestatud_täht} ei ole täht", font=("Helvetica", 16), fg="white")
+            return
         if len(sisestatud_täht) != 1:
-            message_label.config(text=f"{sisestatud_täht} on rohkem kui üks täht")
+            message_label.config(text=f"{sisestatud_täht} on rohkem kui üks täht", font=("Helvetica", 16), fg="white")
+            return
+        
         if sisestatud_täht in arvad_sõna:
             message_label.config(text=f"Oled juba proovinud {sisestatud_täht} tähte")
+        elif sisestatud_täht not in mängusõna:
+            message_label.config(text=f"panid tähe '{sisestatud_täht}' valesti", font=("Helvetica", 16), fg="white")
     
 
         if sisestatud_täht in mängusõna:
@@ -58,7 +63,6 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
             arvad_sõna.append(sisestatud_täht)
 
         if sisestatud_täht not in arvad_sõna:
-            message_label.config(text=f"panid tähe '{sisestatud_täht}' valesti", font=("Helvetica", 16), fg="white")
             arvad_sõna.append(sisestatud_täht)
             elud -= 1
             if elud > 0:
@@ -88,31 +92,28 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     mäng = tk.Tk()
     mäng.title("Poomismäng")
     mäng.geometry("800x600")
-    mäng.configure(bg="#FF1493")
+    mäng.configure(bg="pink")
 
     font = ("Helvetica", 16)
-    label = tk.Label(mäng, text=pilt[0], font=font, bg="#FF1493")
+    label = tk.Label(mäng, text=pilt[0], font=font, bg="pink", fg="#FF1493")
     label.pack(pady=10)
 
-    ekraanil_peidetud_sõna = tk.Label(mäng, text = peidetud_sõna, font=font, bg="#FF1493")
+    ekraanil_peidetud_sõna = tk.Label(mäng, text = peidetud_sõna, font=font, bg="pink", fg="#FF1493")
     ekraanil_peidetud_sõna.pack()
 
-    sõna_pakkumiskast = tk.Entry(mäng, bg="#FF1493")
+    sõna_pakkumiskast = tk.Entry(mäng, bg="#D3D3D3", fg="#FF1493")
     sõna_pakkumiskast.pack()
 
-    message_label = tk.Label(mäng, text="", bg="#FF1493")
+    message_label = tk.Label(mäng, text="", bg="#D3D3D3", fg="#FF1493")
     message_label.pack()
 
-    sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#FF1493" )
+    sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493" )
+    sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493")
     sõna_pakkumiskasti_kontroll.pack()
     
 
-    mäng_kinni = tk.Button(mäng, text="Annan alla 🙁", command=alusta_uuesti,font=font, bg="#FF1493")
+    mäng_kinni = tk.Button(mäng, text="Annan alla 🙁", command=alusta_uuesti,font=font, bg="#D3D3D3", fg="#FF1493")
     mäng_kinni.pack()
-
-
-    
-
 
 
 
@@ -130,10 +131,20 @@ def algus():
 
     aken.configure(bg="pink")
 
-    label = tk.Label(aken, text="Mängime poomist?", font=("Helvetica", 20), bg="pink")
+    src = Image.open("C:\\Users\markovca\\OneDrive - Tartu Ülikool\\Töölaud\\ut\\programmeerimine\\projekt\\hangman\\love_yourself.jpg")
+
+    pil_image = Image.open(image_path)
+    tk_image = ImageTk.PhotoImage(pil_image)
+
+    canvas = tk.Canvas(aken, width=800, height=800, highlightthickness=0)
+    canvas.pack()
+
+    canvas.create_image(0, 0, anchor=tk.NW, image=bg_image)
+
+    label = tk.Label(aken, text="Mängime poomist?", font=("Helvetica", 20), bg="pink", fg="#FF007F")
     label.place(relx=0.5, rely=0.4, anchor="center")    #see nö prindib selle teksti kasti
 
-    nupp = tk.Button(aken, text="Mängi", command=mäng_algab, bg="#FF1493")  #see on nupp esmase kasti sees ja command paneb tööle mäng_algab funktsiooni, mis teeb uue akna, kus mäng on
+    nupp = tk.Button(aken, text="Mängi", command=mäng_algab, bg="#D3D3D3", fg="#FF1493")  #see on nupp esmase kasti sees ja command paneb tööle mäng_algab funktsiooni, mis teeb uue akna, kus mäng on
     nupp.place(relx=0.5, rely=0.5, anchor="center")
 
 
@@ -144,6 +155,7 @@ def alusta_uuesti():            #viib tagasi esimesele aknale
     global mäng
     mäng.destroy()
     algus()
+    
     
 
 
