@@ -36,7 +36,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
         sisestatud_täht = sõna_pakkumiskast.get()
         
         if elud <= 0: 
-            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="red")
+            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="black")
             return
         
         if not sisestatud_täht.isalpha():
@@ -70,7 +70,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
                 
             
         if set(peidetud_sõna) == set(mängusõna):
-            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="green")
+            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="orange")
             return
 
 
@@ -97,23 +97,25 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     font = ("Helvetica", 16)
     label = tk.Label(mäng, text=pilt[0], font=font, bg="pink", fg="#FF1493")
     label.pack(pady=10)
+    label.place(relx=0.5, rely=0.3, anchor="center")
 
     ekraanil_peidetud_sõna = tk.Label(mäng, text = peidetud_sõna, font=font, bg="pink", fg="#FF1493")
-    ekraanil_peidetud_sõna.pack()
+    ekraanil_peidetud_sõna.place(relx=0.5, rely=0.5, anchor="center")
 
     sõna_pakkumiskast = tk.Entry(mäng, bg="#D3D3D3", fg="#FF1493")
-    sõna_pakkumiskast.pack()
+    sõna_pakkumiskast.place(relx=0.5, rely=0.6, anchor="center")
 
-    message_label = tk.Label(mäng, text="", bg="#D3D3D3", fg="#FF1493")
-    message_label.pack()
+    message_label = tk.Label(mäng, text="", bg="pink", fg="#FF1493")
+    message_label.place(relx=0.5, rely=0.7, anchor="center")
+
 
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493" )
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493")
-    sõna_pakkumiskasti_kontroll.pack()
+    sõna_pakkumiskasti_kontroll.place(relx=0.6, rely=0.6, anchor="center")
     
 
     mäng_kinni = tk.Button(mäng, text="Annan alla 🙁", command=alusta_uuesti,font=font, bg="#D3D3D3", fg="#FF1493")
-    mäng_kinni.pack()
+    mäng_kinni.place(relx=0.5, rely=0.8, anchor="center")
 
 
 
@@ -128,6 +130,8 @@ def algus():
     aken.title("Poomismäng")  #akna nimi
 
     aken.geometry("800x600") #akna suurus
+
+    aken.configure(bg="pink")
 
 
     label = tk.Label(aken, text="Mängime poomist?", font=("Helvetica", 20), bg="pink", fg="#FF007F")
