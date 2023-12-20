@@ -1,7 +1,7 @@
 import tkinter as tk
 import random
 import time
-from PIL import Image 
+
 #hakka lugema sellest rohelisest joonest allpool olevast tekstist
 
 aken = None                 #gpt ytles et ma paneks selle, siis saab mäng_algab funktsioon aru, et eelmine aken kinni panna
@@ -129,17 +129,6 @@ def algus():
 
     aken.geometry("800x600") #akna suurus
 
-    aken.configure(bg="pink")
-
-    src = Image.open("C:\\Users\markovca\\OneDrive - Tartu Ülikool\\Töölaud\\ut\\programmeerimine\\projekt\\hangman\\love_yourself.jpg")
-
-    pil_image = Image.open(image_path)
-    tk_image = ImageTk.PhotoImage(pil_image)
-
-    canvas = tk.Canvas(aken, width=800, height=800, highlightthickness=0)
-    canvas.pack()
-
-    canvas.create_image(0, 0, anchor=tk.NW, image=bg_image)
 
     label = tk.Label(aken, text="Mängime poomist?", font=("Helvetica", 20), bg="pink", fg="#FF007F")
     label.place(relx=0.5, rely=0.4, anchor="center")    #see nö prindib selle teksti kasti
