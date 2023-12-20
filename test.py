@@ -23,6 +23,9 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
 
     def kontrolli():
+
+        arvad_sõna = ''
+        õige_sõna = ''
         sisestatud_täht = sõna_pakkumiskast.get()
         ekraanil_peidetud_sõna.config(text=sisestatud_täht)
         
@@ -85,6 +88,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     sõna_pakkumiskast.pack()
 
     message_label = tk.Label(mäng, text="")
+    message_label.pack()
 
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli)
     sõna_pakkumiskasti_kontroll.pack()
@@ -95,8 +99,8 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
     
 
-    while elud > 0:
-        kontrolli()
+    #while elud > 0:
+        #kontrolli()
 
 
 
