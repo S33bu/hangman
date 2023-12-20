@@ -1,12 +1,12 @@
 import tkinter as tk
 import random
-import time
+
 
 #hakka lugema sellest rohelisest joonest allpool olevast tekstist
 
 aken = None                 #gpt ytles et ma paneks selle, siis saab mäng_algab funktsioon aru, et eelmine aken kinni panna
 mäng = None
-elud = 0
+#elud = 0
 peidetud_sõna = []
 arvad_sõna = []
 
@@ -15,21 +15,24 @@ arvad_sõna = []
 
 pilt = [
     "   +---+\n   |   |\n       |\n       |\n       |\n       |\n=========",
-    "   +---+\n   |   |\n   O   |\n       |\n       |\n       |\n=========",
-    "   +---+\n   |   |\n   O   |\n   |   |\n       |\n       |\n=========",
-    "   +---+\n   |   |\n   O   |\n  /|   |\n       |\n       |\n=========",            #parem versioon pildist, iga rida on erinev elu, allpool on mängu lõpp
-    "   +---+\n   |   |\n   O   |\n  /|\\  |\n       |\n       |\n=========",
-    "   +---+\n   |   |\n   O   |\n  /|\\  |\n  /    |\n       |\n=========",
-    "   +---+\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n========="
+    "   +---+\n   |   |\n   O  |\n       |\n       |\n       |\n=========",
+    "   +---+\n   |   |\n   O  |\n   |   |\n       |\n       |\n=========",
+    "   +---+\n   |   |\n   O  |\n  /|   |\n       |\n       |\n=========",            #parem versioon pildist, iga rida on erinev elu, allpool on mängu lõpp
+    "   +---+\n   |   |\n   O  |\n  /|\\  |\n       |\n       |\n=========",
+    "   +---+\n   |   |\n   O  |\n  /|\\  |\n  /    |\n       |\n=========",
+    "   +---+\n   |   |\n   O  |\n  /|\\  |\n  / \\  |\n       |\n========="
 ]
 
 def kontrolli():
         global elud
         
+        
+        
         sisestatud_täht = sõna_pakkumiskast.get()
         
-        if elud <= 0: 
+        if elud <= 1: 
             message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="#FF9999", bg="#FF1493")
+            mäng_kinni.config(text="Lahkun kurbusega")
             return
         
         if not sisestatud_täht.isalpha():
@@ -64,16 +67,20 @@ def kontrolli():
             
         if set(peidetud_sõna) == set(mängusõna):
             message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="#90EE90", bg="#FF1493")
+            mäng_kinni.config(text="Mängin uuesti!")
             return
         
-def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
-    global elud, peidetud_sõna, arvad_sõna, mängusõna, sõna_pakkumiskast, message_label, ekraanil_peidetud_sõna, label
-  
+        sõna_pakkumiskast.delete(0, "end")
+        sõna_pakkumiskast.icursor(0)
 
+def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
+    global elud, peidetud_sõna, arvad_sõna, mängusõna, sõna_pakkumiskast, message_label, ekraanil_peidetud_sõna, label, mäng_kinni
+  
+    
 
 
     sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
-        "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
+        "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev", "viies", "laisk", "lõuna", "uudis", "mõõde", "kuusk", "käive", "küllus"]
 
     mängusõna = random.choice(sõnad)  #valib mingi sõna üleval olevast listist
     mängusõna1 = list(mängusõna)
@@ -108,6 +115,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493" )
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493")
+    sõna_pakkumiskast.bind("<Return>", lambda event: kontrolli())
     sõna_pakkumiskasti_kontroll.place(relx=0.58, rely=0.6, anchor="center")
     
 
