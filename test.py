@@ -23,14 +23,7 @@ pilt = [
     "   +---+\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n========="
 ]
 
-
-def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
-    global elud, peidetud_sõna, arvad_sõna
-  
-    while elud > 0: 
-        kontrolli()
-
-    def kontrolli():
+def kontrolli():
         global elud
         
         sisestatud_täht = sõna_pakkumiskast.get()
@@ -72,6 +65,10 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
         if set(peidetud_sõna) == set(mängusõna):
             message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="orange")
             return
+        
+def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
+    global elud, peidetud_sõna, arvad_sõna, mängusõna, sõna_pakkumiskast, message_label, ekraanil_peidetud_sõna, label
+  
 
 
 
@@ -84,10 +81,10 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     peidetud_sõna = list("_" * len(mängusõna))  #siin nt kui sõna on kott ja sa pakud k siis -> k _ _ _
     arvad_sõna = []
     #--------------------------------------
-
-    global aken             #siit hakkab tegelikult käima
+    aken.destroy()  
+                #siit hakkab tegelikult käima
     global mäng
-    aken.destroy()              #see paneb eelmise akna kinni ja avab uue
+                #see paneb eelmise akna kinni ja avab uue
 
     mäng = tk.Tk()
     mäng.title("Poomismäng")
@@ -116,6 +113,8 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
     mäng_kinni = tk.Button(mäng, text="Annan alla 🙁", command=alusta_uuesti,font=font, bg="#D3D3D3", fg="#FF1493")
     mäng_kinni.place(relx=0.5, rely=0.8, anchor="center")
+
+    mäng.mainloop()
 
 
 
