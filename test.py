@@ -18,11 +18,9 @@ pilt = [
 ]
 
 
-<<<<<<< HEAD
 def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     global elud
-    global õige_sõna
-    global arvad_sõna
+
 
     def kontrolli():
         sisestatud_täht = sõna_pakkumiskast.get()
@@ -56,15 +54,6 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
 
 
-=======
-def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
-    
-    def kontrolli():
-        sisestatud_sõna = sõna_pakkumiskast.get()
-        ekraanil_peidetud_sõna.config(text=sisestatud_sõna)
-            
-
->>>>>>> 42d2b8655526efd4821cb70544d8cc1547050803
     sõnad = ["õun", "jõgi", "laud", "kott", "nupp", "uks", "käsi",
         "kell", "tuli", "rohi", "nina", "lill", "tore", "pilt", "päev"]
 
@@ -95,7 +84,6 @@ def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
     sõna_pakkumiskast = tk.Entry(mäng)
     sõna_pakkumiskast.pack()
 
-<<<<<<< HEAD
     message_label = tk.Label(mäng, text="")
 
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli)
@@ -110,13 +98,6 @@ def mäng_algab():               #enamus mängust peaks siin sees olema? äkki
     while elud > 0:
         kontrolli()
 
-=======
-    sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli)
-    sõna_pakkumiskasti_kontroll.pack()
-
-    mäng_kinni = tk.Button(mäng, text="Annan alla :(", command=alusta_uuesti,font=font)
-    mäng_kinni.pack()
->>>>>>> 42d2b8655526efd4821cb70544d8cc1547050803
 
 
 
