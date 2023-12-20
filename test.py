@@ -29,7 +29,7 @@ def kontrolli():
         sisestatud_täht = sõna_pakkumiskast.get()
         
         if elud <= 0: 
-            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="#90EE90")
+            message_label.config(text="Kaotasid mängu", font=("Helvetica", 16), fg="#FF9999", bg="#FF1493")
             return
         
         if not sisestatud_täht.isalpha():
@@ -63,7 +63,7 @@ def kontrolli():
                 
             
         if set(peidetud_sõna) == set(mängusõna):
-            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="#90EE90")
+            message_label.config(text="VÕITSID!", font=("Helvetica", 16), fg="#90EE90", bg="#FF1493")
             return
         
 def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
@@ -100,7 +100,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
     ekraanil_peidetud_sõna.place(relx=0.5, rely=0.5, anchor="center")
 
     sõna_pakkumiskast = tk.Entry(mäng, bg="#D3D3D3", fg="#FF1493")
-    sõna_pakkumiskast.place(relx=0.5, rely=0.6, anchor="center")
+    sõna_pakkumiskast.place(relx=0.48, rely=0.6, anchor="center")
 
     message_label = tk.Label(mäng, text="", bg="pink", fg="#FF1493")
     message_label.place(relx=0.5, rely=0.7, anchor="center")
@@ -108,7 +108,7 @@ def mäng_algab():             #enamus mängust peaks siin sees olema? äkki
 
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493" )
     sõna_pakkumiskasti_kontroll = tk.Button(mäng, text="Paku", command=kontrolli, bg="#D3D3D3", fg="#FF1493")
-    sõna_pakkumiskasti_kontroll.place(relx=0.6, rely=0.6, anchor="center")
+    sõna_pakkumiskasti_kontroll.place(relx=0.58, rely=0.6, anchor="center")
     
 
     mäng_kinni = tk.Button(mäng, text="Annan alla 🙁", command=alusta_uuesti,font=font, bg="#D3D3D3", fg="#FF1493")
